@@ -1,0 +1,39 @@
+trigger: 
+- master
+- develop
+
+pool:
+  vmImage: 'ubuntu-20.04'
+
+variables:
+  # develop 브랜치일 경우 Dev 환경으로 설정
+  ${{ if eq(variables['Build.SourceBranch'], 'refs/heads/develop') }}:
+    webAppName: 'MIRSSR-dev'
+    azureServiceConnection: 'MIRSSR-dev'
+
+  # master 브랜치일 경우 Live 환경으로 설정
+  ${{ if eq(variables['Build.SourceBranch'], 'refs/heads/master') }}:
+    webAppName: 'MIRSSR-live'
+    azureServiceConnection: 'MIRSSR-live'
+
+steps:
+# Node.js 환경 설정
+- task: NodeTool@0
+  inputs:
+    versionSpec: '18.x'
+  displayName: 'Install Node.js'
+
+# Nuxt 3 프로젝트 빌드
+- script: |
+    npm install
+    npm run build
+  displayName: 'Build Nuxt3 app'
+
+# Azure Web App으로 배포
+- task: AzureWebApp@1
+  inputs:
+    azureSubscription: $(azureServiceConnection) # 동적으로 설정된 서비스 연결을 사용
+    appType: 'webApp linux'
+    appName: $(webAppName) # 동적으로 설정된 앱 이름을 사용
+    runtimeStack: 'NODE|18-lts'
+    package: $(Build.ArtifactStagingDirectory)
