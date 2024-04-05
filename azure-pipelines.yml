@@ -3,7 +3,7 @@ trigger:
 - develop
 
 pool:
-  vmImage: 'ubuntu-latest'
+  vmImage: 'ubuntu-20.04'
 
 variables:
   # develop 브랜치일 경우 Dev 환경으로 설정
