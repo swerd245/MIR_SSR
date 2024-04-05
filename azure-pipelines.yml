@@ -34,11 +34,6 @@ steps:
     npm run build
   displayName: 'Build Nuxt3 app'
 
-# Nuxt 3 App 시작 (옵션)
-- script: |
-    npm start
-  displayName: 'Start Nuxt3 app'
-
 # Azure Web App으로 배포
 - task: AzureWebApp@1
   inputs:
