@@ -37,8 +37,8 @@ steps:
 # Azure Web App으로 배포
 - task: AzureWebApp@1
   inputs:
-    azureSubscription: 'Azure subscription 1' # Azure 구독
-    appType: 'webApplinux # 웹 앱의 호스팅 환경
-    appName: $(webAppName) # 동적으로 설정된 앱 이름을 사용
-    runtimeStack: 'NODE|18-lts' # 프로젝트와 일치하는 node 버전으로 수정
-    package: $(Build.ArtifactStagingDirectory) # 배포할 패키지 위치
+    azureSubscription: 'Azure subscription 1'  # Azure 구독
+    appType: 'webApp linux'  # 웹 앱의 호스팅 환경, 공백 추가
+    appName: $(webAppName)  # 동적으로 설정된 앱 이름을 사용
+    runtimeStack: 'NODE|18-lts'  # 프로젝트와 일치하는 node 버전으로 수정
+    package: $(Build.ArtifactStagingDirectory)  # 배포할 패키지 위치, 필요에 따라 경로 확인
