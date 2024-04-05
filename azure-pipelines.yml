@@ -1,0 +1,44 @@
+# trigger 실행 브랜치 정의
+trigger: 
+- master
+- develop
+
+# pipeline이 실행될 azent pool
+pool:
+  vmImage: 'linux-latest'
+
+# 브랜치 구분 조건문
+variables:
+  # develop 브랜치일 경우 Dev 환경으로 설정
+  ${{ if eq(variables['Build.SourceBranch'], 'refs/heads/develop') }}:
+    webAppName: 'MIRSSR-dev'
+  # develop 브랜치가 아닐 경우 그 외 환경(main 포함)으로 설정
+  ${{ if ne(variables['Build.SourceBranch'], 'refs/heads/develop') }}:
+    webAppName: 'MIRSSR-live'
+
+steps:
+# Node.js 환경 설정
+- task: NodeTool@0
+  inputs:
+    versionSpec: '18.x'
+  displayName: 'Install Node.js'
+
+# Nuxt 3 프로젝트 빌드
+- script: |
+    npm install
+    npm run build
+  displayName: 'Build Nuxt3 app'
+
+# Nuxt 3 App 시작 (옵션)
+- script: |
+    npm start
+  displayName: 'Start Nuxt3 app'
+
+# Azure Web App으로 배포
+- task: AzureWebApp@1
+  inputs:
+    azureSubscription: 'Azure subscription 1' # Azure 구독
+    appType: 'webApplinux # 웹 앱의 호스팅 환경
+    appName: $(webAppName) # 동적으로 설정된 앱 이름을 사용
+    runtimeStack: 'NODE|18-lts' # 프로젝트와 일치하는 node 버전으로 수정
+    package: $(Build.ArtifactStagingDirectory) # 배포할 패키지 위치
