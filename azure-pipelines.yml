@@ -6,7 +6,7 @@ pool:
   vmImage: 'ubuntu-20.04'
 
 variables:
-  # develop 브랜치일 경우 Dev 환경으로 설정
+  # develop 브랜치일 경우 Dev 환경으로 설정test
   ${{ if eq(variables['Build.SourceBranch'], 'refs/heads/develop') }}:
     webAppName: 'MIRSSR-dev'
     azureServiceConnection: 'MIRSSR-dev'
