@@ -23,9 +23,14 @@ steps:
     versionSpec: '18.x'
   displayName: 'Install Node.js'
 
+# package-lock.json과 node_modules 삭제
+- script: |
+    rm -rf node_modules package-lock.json
+    npm install
+  displayName: 'Clean install dependencies'
+
 # Nuxt 3 프로젝트 빌드
 - script: |
-    npm install
     npm run build
   displayName: 'Build Nuxt3 app'
 
