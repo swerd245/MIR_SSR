@@ -1,0 +1,240 @@
+@mixin mobile {
+    @media (max-width: 480px) {
+        @content;
+    }
+}
+
+@mixin option {
+    background: #fff;
+    font-size: 14px;
+    padding: 17px 16px;
+}
+
+// 이거 /styles/components 밑에 환쪽으로 옮겨야할듯
+// @mixin hwanPageStyle {
+//     .hwan-title {
+//         margin-bottom: 12px;
+//         line-height: 1.25rem;
+//         font-size: 1.5625rem;
+//         font-weight: 700;
+
+//         @include mobile {
+//             font-size: 2.5313rem;
+//             text-align: center;
+//             line-height: 2.375rem;
+//         }
+//     }
+
+//     .hwan-subtitle {
+//         font-size: 0.875rem;
+//         line-height: 1.25rem;
+//         color: $gray-text5;
+//         border-bottom: 1px solid #e6e6e6;
+//         padding-bottom: 15px;
+
+//         @include mobile {
+//             font-size: 1.7188rem;
+//             text-align: center;
+//             line-height: 2.125rem;
+//             @include flexBox(center, center);
+//         }
+//     }
+
+//     .current-status {
+//         align-items: center;
+//         padding: 35px 0 30px;
+//         border-top: 1px solid #e6e6e6;
+//         border-bottom: 1px solid #e6e6e6;
+
+//         @include mobile {
+//             background: #f7f9fc;
+//             padding: 2.313rem 2.188rem;
+//         }
+
+//         .current-hwan {
+//             .total {
+//                 display: flex;
+//                 align-items: center;
+//                 gap: 5.375rem;
+
+//                 @include mobile {
+//                     gap: 1.813rem;
+//                     align-items: flex-start;
+//                 }
+//             }
+//             .total-text {
+//                 position: relative;
+//                 padding-left: 1.438rem;
+//                 font-weight: 700;
+//                 color: #515251;
+
+//                 @include mobile {
+//                     padding-left: 3rem;
+//                 }
+
+//                 &::before {
+//                     content: "";
+//                     display: block;
+//                     width: 1.188rem;
+//                     height: 1.2rem;
+//                     position: absolute;
+//                     top: 50%;
+//                     left: 0;
+//                     transform: translateY(-50%);
+
+//                     @include mobile {
+//                         width: 2.2rem;
+//                         height: 2.5rem;
+//                     }
+//                 }
+//             }
+
+//             .total-amount {
+//                 font-size: 0.875rem;
+//                 color: #000;
+
+//                 @include mobile {
+//                     font-size: 2.531rem;
+//                     font-size: 1.719rem;
+//                     line-height: 2.375rem;
+//                     padding-left: 3rem;
+//                     width: 100%;
+//                 }
+
+//                 .amount {
+//                     font-size: 1.563rem;
+//                     font-weight: 700;
+//                     line-height: 1.563rem;
+
+//                     @include mobile {
+//                         font-size: 2.531rem;
+//                         color: $brand-color;
+//                     }
+//                 }
+//             }
+
+//             .each-hwan {
+//                 display: flex;
+//                 margin-top: 1.125rem;
+//                 margin-left: 11.938rem;
+//             }
+
+//             .balance-wrap {
+//                 display: flex;
+//                 align-items: center;
+
+//                 .charge-text {
+//                     padding: 0.3rem 0.438rem 0.25rem 0.463rem;
+//                     font-weight: 700;
+//                     line-height: 1rem;
+//                     border-radius: 14px;
+//                     border: solid 1px $brand-color;
+//                     color: $brand-color;
+//                     font-size: 0.844rem;
+//                 }
+
+//                 .free-text {
+//                     padding: 0.3rem 0.438rem 0.25rem 0.463rem;
+//                     font-weight: 700;
+//                     line-height: 1rem;
+//                     border-radius: 14px;
+//                     border: solid 1px #afaeae;
+//                     color: #717272;
+//                     font-size: 0.844rem;
+//                 }
+
+//                 .balance {
+//                     margin-left: 0.563rem;
+//                     color: $panel-carret-color;
+//                     line-height: 1rem;
+
+//                     .amount {
+//                         font-weight: 700;
+//                         line-height: 1.375rem;
+//                         color: $panel-carret-color;
+//                     }
+//                 }
+//             }
+
+//             .balance-wrap.charge {
+//                 &:after {
+//                     content: "";
+//                     width: 1px;
+//                     height: 1rem;
+//                     background: $brand-color;
+//                     margin: auto 2.125rem;
+//                     left: 10.125rem;
+//                 }
+//             }
+//         }
+
+//         .single-button {
+//             button {
+//                 width: 155px;
+//                 height: 40px;
+//                 line-height: 40px;
+//             }
+//         }
+//     }
+
+//     .table-list-warp {
+//         margin-top: 18px;
+//     }
+//     .history-wrap {
+//         margin-top: 23px;
+
+//         .history-tab-button {
+//             width: 50%;
+//             padding: 21px 0;
+//             color: $panel-carret-color;
+//             background-color: #f7f9fc;
+//             border-bottom: 1px solid $brand-color;
+//             line-height: 1rem;
+//             &.on {
+//                 background-color: $white;
+//                 border: 1px solid $brand-color;
+//                 border-bottom: 0;
+//                 color: $black;
+//                 font-weight: 700;
+//             }
+//         }
+//     }
+// }
+
+$flex-map: (
+    start: flex-start,
+    end: flex-end,
+    between: space-between,
+    around: space-around,
+    even: space-evenly,
+    center: center,
+);
+
+@function getFlexValue($key) {
+    @return map-get($flex-map, $key);
+}
+
+@mixin flexBox($jc: center, $ai: null, $direction: null) {
+    display: flex;
+    justify-content: getFlexValue($jc);
+    @if $ai {
+        align-items: getFlexValue($ai);
+    }
+    @if $direction {
+        flex-direction: $direction;
+    }
+}
+
+@mixin separator {
+    &:after {
+        content: "|";
+        color: #d8dbe7;
+        padding-left: 13px;
+        padding-right: 13px;
+
+        @include mobile {
+            padding-left: 1.4375rem;
+            padding-right: 1.4375rem;
+        }
+    }
+}
